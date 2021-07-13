@@ -1,19 +1,23 @@
-import { faCoffee,faHamburger,faPhone,faMailBulk } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee,faHamburger,faPhone,faMailBulk,faHeartbeat } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook,faTwitter,faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Swip from './Swip';
 import '../sass/homepage.css';
 const HomePage = () => {
     return (  
         <div className="homepage">  
             <section className="socials homepage__socials">
-                <div className="socials__item"><FontAwesomeIcon icon={faTwitter} size="3x" color="grey"/></div>
-                <div className="socials__item"><FontAwesomeIcon icon={faFacebook} size="3x" color="grey"/></div>
-                <div className="socials__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="grey"/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faTwitter} size="2x" color="grey"/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faFacebook} size="2x" color="grey"/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faInstagram} size="2x" color="grey"/></div>
             </section>
+            <div className="homepage__wrapper">
+                <div className="homepage__line"></div>
+            </div>
             <nav className="menu homepage__nav">
                 <div className="logo">
                     <img src="" alt="" className="logo__image" />
-                    <span className="logo__name">Nazwa firmy</span>
+                    <span className="logo__name">Trainers P.R.O</span>
                 </div>
                 {/* <ul className="menu__list">
                     <li className="menu__item">Home</li>
@@ -24,14 +28,17 @@ const HomePage = () => {
                 <div className="menu__hamburger"><FontAwesomeIcon icon={faHamburger}/></div>
             </nav>
             <section className="header homepage__header">
-                <span>Twój cel nasze wyzwanie</span>
+                <span className="header__title">Twój cel nasze wyzwanie</span>
             </section>
             <section className="trainers homepage__trainers">
                 <div className="trainers__title"><span>Nasi Trenerzy</span></div>
-                <div className="trainers__trainer__img"><img /></div>
+                <div className="trainers__trainer">
+                <div className="trainers__trainer__img"><img src="http://localhost:3000/trainer5.jpg" alt="trener"/></div>
                 <div className="trainers__trainer__name">Patryk Trener</div>
                 <div className="trainers__trainer__job">Dietetyk / Trener Personalny</div>
+                </div>
             </section>
+            {/* <Swip /> */}
             <section className="aboutus homepage__aboutus">
                 <div className="aboutus__title">O nas</div>
                 <div className="aboutus__content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, eaque. Modi adipisci explicabo impedit, optio eaque esse architecto facilis dolor sapiente quos? Aspernatur quam omnis blanditiis odio corporis itaque recusandae!</div>
@@ -43,16 +50,16 @@ const HomePage = () => {
             </section>
             <section className="offer homepage__offer">
                 <div className="offer__title">
-                    <span>Nasza Oferta</span>
+                    Nasza Oferta
                 </div>
                 <div className="offer__elements">
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__item"><img src="" alt="" /><div className="offer__item__title--big"><div className="offer__item__title--small"></div></div></div>
-                    <div className="offer__btn">Sprawdź naszą ofertę</div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Trening start-up</div><div className="offer__item__title--small">dedykowany osobom rozpoczynającym swoją przygodę z aktywnością fizyczną</div></div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Trening beauty line</div><div className="offer__item__title--small">nastawiony na kształtowanie mięśni w możliwie najlepszych proporcjach Twojego ciała</div></div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Trening ogólnorozwojowy</div><div className="offer__item__title--small">byś poczuł się lepiej we własnym ciele</div></div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Rozwój</div><div className="offer__item__title--small">byś poczuł się lepiej we własnym ciele</div></div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Trening redukcyjny</div><div className="offer__item__title--small">który pomoże Ci pozbyć się nadprogramowej ilości tkanki tłuszczowej</div></div>
+                    <div className="offer__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="white"/><div className="offer__item__title--big">Trening medyczny</div><div className="offer__item__title--small">umożliwia zwiększenie kontroli nad własnym ciałem oraz prawidłowe funkcjonowanie aparatu ruchu</div></div>
+                    <button className="btn offer__btn">Sprawdź naszą ofertę</button>
                 </div>
             </section>
             <section className="packages homepage__packages">
