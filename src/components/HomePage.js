@@ -1,13 +1,14 @@
 import { faCoffee,faHamburger,faPhone,faMailBulk } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook,faTwitter,faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import '../sass/homepage.css';
 const HomePage = () => {
     return (  
         <div className="homepage">  
             <section className="socials homepage__socials">
-                <div className="socials__item"><FontAwesomeIcon icon={faTwitter}/></div>
-                <div className="socials__item"><FontAwesomeIcon icon={faFacebook}/></div>
-                <div className="socials__item"><FontAwesomeIcon icon={faInstagram}/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faTwitter} size="3x" color="grey"/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faFacebook} size="3x" color="grey"/></div>
+                <div className="socials__item"><FontAwesomeIcon icon={faInstagram} size="3x" color="grey"/></div>
             </section>
             <nav className="menu homepage__nav">
                 <div className="logo">

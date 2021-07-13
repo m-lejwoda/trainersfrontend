@@ -1,0 +1,29 @@
+.homepage{
+    background-color: #232222;
+    
+}
+.socials{
+    display:flex;
+    padding-top: 1rem;
+    justify-content: center;
+    padding-bottom: 1rem;
+    &__item{
+        margin-right:2rem;
+    }
+}
+.menu{
+    display:flex;
+    font-size: 1.4rem;
+    color:white;
+    &__hamburger{
+        display:flex;
+        justify-content: end;
+    }
+}
+.logo{
+    width:90%;
+    display:flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    color:white;
+}
