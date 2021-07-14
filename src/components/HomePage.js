@@ -3,6 +3,7 @@ import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Swip from './Swip';
 import '../sass/homepage.css';
+import Navbar from './Navbar';
 const HomePage = () => {
     return (
         <div className="homepage">
@@ -14,19 +15,21 @@ const HomePage = () => {
             <div className="homepage__wrapper">
                 <div className="homepage__line"></div>
             </div>
-            <nav className="menu homepage__nav">
+            <Navbar />
+            {/* <nav className="menu homepage__nav">
                 <div className="logo">
                     <img src="" alt="" className="logo__image" />
                     <span className="logo__name">Trainers P.R.O</span>
                 </div>
-                {/* <ul className="menu__list">
+                <ul className="menu__list">
                     <li className="menu__item">Home</li>
                     <li className="menu__item">O nas</li>
                     <li className="menu__item">Rezerwacje</li>
                     <li className="menu__item">Kontakt</li>
-                </ul> */}
+                </ul>
                 <div className="menu__hamburger"><FontAwesomeIcon icon={faBars} /></div>
-            </nav>
+            </nav> */}
+
             <section className="header homepage__header">
                 <span className="header__title">Twój cel nasze wyzwanie</span>
             </section>
