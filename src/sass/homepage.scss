@@ -1,7 +1,10 @@
 $headerimg: "http://localhost:3000/gym.jpg";
 $gymimg: "http://localhost:3000/weight.jpg";
+$beatifullred: #ff2a43;
 .homepage{
-    background-color: #232222;
+    // background-color: #232222;
+    color:white;
+    background-color: #020101;
     &__wrapper{
         display:flex;
         width: 100%;
@@ -57,6 +60,7 @@ $gymimg: "http://localhost:3000/weight.jpg";
         font-weight: 700;
         width:150px;
         text-align: center;
+        
     }
 }
 .trainers{
@@ -68,6 +72,8 @@ $gymimg: "http://localhost:3000/weight.jpg";
         display: flex;
         justify-content: center;
         position:relative;
+        margin-bottom: 3rem;
+        margin-top:1rem;
     }
     &__title::after{
         content:"";
@@ -113,6 +119,8 @@ $gymimg: "http://localhost:3000/weight.jpg";
         display: flex;
         justify-content: center;
         position:relative;
+        margin-bottom: 3rem;
+        margin-top:1rem;
     }
     &__title::after{
         content:"";
@@ -139,6 +147,8 @@ $gymimg: "http://localhost:3000/weight.jpg";
         display: flex;
         justify-content: center;
         position:relative;
+        margin-bottom: 3rem;
+        margin-top:1rem;
     }
     &__title::after{
         content:"";
@@ -150,11 +160,14 @@ $gymimg: "http://localhost:3000/weight.jpg";
         bottom: 0;
     }
     &__btn{
-        background-color:red;
-        padding:0.3rem;
+        font-weight: 600;
+        padding:0.3rem 0.5rem 0.3rem 0.5rem;
         display:inline-block;
         width: 50%;
         margin-bottom:1rem;
+        color: #fff;
+        background-color: #e51c21;
+        border-color: transparent;
     }
     &__elements{
         margin-top:2rem;
@@ -202,14 +215,201 @@ $gymimg: "http://localhost:3000/weight.jpg";
                 
             }
             &--small{
+                
                 padding-top:1rem;
                 font-size:1.2rem;
                 margin-bottom: 1rem;
                 font-weight: 400;
                 text-align: center;
-                width:50%;
+                width:60%;
                 font-family: "Montserrat",Sans-serif;
             }
     }
+    }
+}
+.packages{
+    &__elements{
+        padding:1rem 2rem 1rem 2rem;
+        text-align: center;
+        &__item{
+            margin-bottom:2rem;
+            border-radius: 30px;
+            padding:2rem;
+            &__btn{
+                font-size:1.3rem;
+                font-weight: 600;
+                padding:0.3rem 0.5rem 0.3rem 0.5rem;
+                display:inline-block;
+                width: 70%;
+                margin-bottom:1rem;
+                color: #fff;
+                background-color: #e51c21;
+                border-color: transparent;
+            }
+            &__content{
+                &--big{
+                    font-size:1.4rem;
+                    font-weight: 600;
+                }
+                &--small{
+                    font-size:1.2rem;
+                    font-weight: 400;
+                }
+            }
+            
+        }
+        &__item:nth-child(even){
+            background-color: purple;
+        }
+        &__item:nth-child(odd){
+            background-color: grey;
+        }
+    }
+    &__title{
+        padding-top:1rem;
+        padding-bottom: 1rem;
+        font-size:2rem;
+        color:grey;
+        display: flex;
+        justify-content: center;
+        position:relative;
+        margin-bottom: 3rem;
+        margin-top:1rem;
+    }
+    &__title::after{
+        content:"";
+        width:70%;
+        height:5px;
+        display:block;
+        background-color: red;
+        position: absolute;
+        bottom: 0;
+    }
+    &__others{
+        color:black;
+        background-color: white;
+        text-align: center;
+        font-weight: 600;
+        padding:1rem;
+        font-size:1.2rem;
+        font-family: "Montserrat",Sans-serif;
+    }
+}
+.contactus{
+    padding-top: 1.5rem;
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    &__sendmail{
+        &__title{
+            padding-top:1rem;
+            padding-bottom: 1rem;
+            font-size:2rem;
+            color:grey;
+            display: flex;
+            justify-content: center;
+            position:relative;
+            margin-bottom:2rem;
+        }
+        &__title::after{
+            content:"";
+            width:70%;
+            height:5px;
+            display:block;
+            background-color: $beatifullred;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+    &__title{
+        padding-top:1rem;
+        padding-bottom: 1rem;
+        font-size:2rem;
+        color:grey;
+        display: flex;
+        justify-content: center;
+        position:relative;
+        margin-bottom: 3rem;
+    }
+    &__title::after{
+        content:"";
+        width:80%;
+        height:5px;
+        display:block;
+        background-color: $beatifullred;
+        position: absolute;
+        bottom: 0;
+    }
+    &__socials{
+        &__item{
+            margin-bottom:3rem;
+            &__title{
+                &--big{
+                    margin-top:2rem;
+                    font-size:1.5rem;
+                    font-weight: 700;
+                }
+                &--small{
+                    margin-top:1.5rem;
+                    font-size:1.1rem;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+.sendmail{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding:1rem;
+    &__btn{
+        margin-top:2rem;
+        font-weight: 600;
+        padding:0.5rem 0.3rem 0.5rem 0.3rem;
+        display:inline-block;
+        width: 70%;
+        font-size:1.3rem;
+        margin-bottom:1rem;
+        color: #fff;
+        background-color: #e51c21;
+        border-color: transparent;
+        border-radius: 60px;
+    }
+    &__input{
+        color:white;
+        background-color: transparent;
+        padding:1rem 0.2rem 1rem 0.2rem;
+        // margin:0rem 2rem 0rem 2rem;
+        font-size:1.2rem;
+        border-top: none;
+        border-left:none;
+        border-right:none;
+        border-color: $beatifullred;
+        margin-bottom: 1.2rem;
+        width: 90%;
+        
+    }
+    &__input::placeholder{
+        color: white;
+    }
+    &__input:focus{
+        outline:none;
+    }
+}
+.footer{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    &__copyright-info{
+        font-size:0.8rem;
+        &--red{
+            color: $beatifullred;
+            margin-bottom:0.5rem;
+        }
+        &--white{
+            color: white;
+            margin-bottom:0.5rem;
+        }
     }
 }
