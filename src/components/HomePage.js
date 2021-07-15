@@ -129,11 +129,11 @@ const HomePage = () => {
                 </form>
             </section>
 
-            <footer className="footer homepage__footer">
+            {/* <footer className="footer homepage__footer">
                 <div className="footer__copyright-info--red">Polityka prywatności</div>
                 <div className="footer__copyright-info--white">Wszelkie prawa zastrzeżone &copy; Trainers P.R.O</div>
-                {/* <address className="footer__copyrigt-address">Adres</address> */}
-            </footer>
+                <address className="footer__copyrigt-address">Adres</address>
+            </footer> */}
 
         </div>
     );

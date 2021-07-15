@@ -9,6 +9,8 @@ import {
 import HomePage from './components/HomePage';
 import Reservation from './components/Reservation';
 import Navbar from './components/Navbar';
+import Policy from './components/Policy';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -23,7 +25,11 @@ function App() {
           <Route path="/navbar">
             <Navbar />
           </Route>
+          <Route>
+            <Policy />
+          </Route>
         </Switch>
+        <Footer />
       
     </Router>
 
