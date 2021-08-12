@@ -1,6 +1,6 @@
 
 import Navbar from "./Navbar";
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import '../sass/calendar.css';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -45,10 +45,12 @@ const Reservation = (props) => {
     const classes = useStyles();
     const [daytraining, setDayTraining] = useState([])
     const [dayhours, setDayHours] = useState([])
-    const [starthour,setStartHour] = useState('')
-    const [endhour,setEndHour] = useState('')
-    
+    const [starthour, setStartHour] = useState('')
+    const [endhour, setEndHour] = useState('')
+
     const handleInputChange = (event) => {
+        setStartHour('')
+        setEndHour('')
         setTrainer(event.target.value);
         let hours_array = get_hours(parseDate(date), event.target.value)
         hours_array.then(function (result) {
@@ -64,6 +66,8 @@ const Reservation = (props) => {
         setEndHour(e.target.attributes.endhour.value)
     }
     const clickDate = (value) => {
+        setStartHour('')
+        setEndHour('')
         changeDate(value)
         let hours_array = get_hours(parseDate(value), trainer)
         hours_array.then(function (result) {
@@ -78,24 +82,22 @@ const Reservation = (props) => {
     }, [])
 
     useEffect(() => {
-        if(daytraining.length > 0 ){
+        if (daytraining.length > 0) {
             setDayHours([])
             let temp_array = []
-            for(let i=0;i<daytraining[0].trainershour.length;i++){
-                for(let j=0;j<daytraining[0].trainershour[i].hours_list.length;j++){
+            for (let i = 0; i < daytraining[0].trainershour.length; i++) {
+                for (let j = 0; j < daytraining[0].trainershour[i].hours_list.length; j++) {
                     temp_array.push(daytraining[0].trainershour[i].hours_list[j])
                 }
             }
             setDayHours(temp_array)
         }
-      }, [daytraining,trainer]);
+    }, [daytraining, trainer]);
 
     return (
-
         <div className="reservation">
             <Navbar />
             <div className="calendar reservation__calendar">
-
                 <FormControl className={classes.formControl}>
                     <InputLabel className={classes.selected}>Wybierz trenera</InputLabel>
                     <Select
@@ -110,6 +112,7 @@ const Reservation = (props) => {
                     </Select>
                 </FormControl>
 
+                
                 <Calendar
                     // onChange={onChange}
                     onChange={clickDate}
@@ -119,7 +122,18 @@ const Reservation = (props) => {
                 />
             </div>
             <div className="reservation__elements">
-                {dayhours.map((hour, index) => <div className="reservation__item" key={index} starthour={hour[0]} endhour={hour[1]} onClick={getHour}>{hour[0].slice(0,-3)} - {hour[1].slice(0,-3)}</div>)}
+            {/* <div class="radio-toolbar"> */}
+                    {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" />
+                    <label for="radioApple">Apple</label>
+
+                    <input type="radio" id="radioBanana" name="radioFruit" value="banana" />
+                    <label for="radioBanana">Banana</label>
+
+                    <input type="radio" id="radioOrange" name="radioFruit" value="orange" />
+                    <label for="radioOrange">Orange</label> */}
+                {/* </div> */}
+                {/* {dayhours.map((hour, index) => <div className="reservation__item" key={index} starthour={hour[0]} endhour={hour[1]} onClick={getHour}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</div>)} */}
+                {dayhours.map((hour,index) => <>< input key={index} type="radio" id={hour[0]} name="radioHour" value="hour" disabled={hour[2] ? false : true} /><label key={hour[0]} starthour={hour[0]} endhour={hour[1]} onClick={getHour} for={hour[0]}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</label></>)}
             </div>
             <div className="reservation__userdetails">
                 <div className="reservation__userdetails__title">Rezerwacja</div>
@@ -146,6 +160,7 @@ const Reservation = (props) => {
                 </FormControl>
                 <button className="reservation__userdetails__btn">Zatwierdź rezerwacje</button>
             </div>
+
 
         </div>
     );
