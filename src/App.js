@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,8 +12,14 @@ import Reservation from './components/Reservation';
 import Navbar from './components/Navbar';
 import Policy from './components/Policy';
 import Footer from './components/Footer';
+import {connect} from 'react-redux';
+import {get_trainers} from './redux/actions/trainerActions'
 
-function App() {
+function App(props) {
+  useEffect(()=>{
+    props.get_trainers()
+},[])
+
   return (
     <Router>
         <Switch>
@@ -35,5 +42,9 @@ function App() {
 
   );
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return{
+  trainers: state.trainer.trainers,
+  loadedtrainers: state.trainer.trainers.loadedtrainers
+}}
+export default connect(mapStateToProps,{get_trainers})(App);
