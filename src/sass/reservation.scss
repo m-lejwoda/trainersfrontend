@@ -22,6 +22,12 @@
 // }
 $beatifullred: #ff2a43;
 .reservation{
+    &__error{
+        margin-top:2rem;
+        margin-bottom: 2rem;
+        color:red;
+        text-align: center;
+    }
     &__elements{
         display:flex;
         flex-direction: row;
@@ -39,7 +45,7 @@ $beatifullred: #ff2a43;
         }
         label {
             display: inline-block;
-            
+            width: 140px;
             padding: 10px 20px;
             font-family: sans-serif, Arial;
             font-size: 16px;
@@ -64,18 +70,21 @@ $beatifullred: #ff2a43;
         flex-direction: column;
         align-items: center;
         &__btn{
-                margin-top:2rem;
+                margin-top:1.2rem;
                 font-weight: 600;
                 padding:0.5rem 0.3rem 0.5rem 0.3rem;
                 display:inline-block;
                 width: 70%;
                 font-size:1.3rem;
-                margin-bottom:1rem;
                 color: #fff;
                 background-color: #e51c21;
                 border-color: transparent;
                 border-radius: 60px;
+                
             }
+        &__btn:hover{
+            cursor:pointer;
+        }
         
         &__title{
             padding-top:1rem;
@@ -128,7 +137,18 @@ $beatifullred: #ff2a43;
 }
 .MuiInput-inputTypeSearch{
     margin-top:2rem;
+    color:white;
 }
+.MuiInputBase-input{
+    color:white;
+}
+.MuiSelect-selectMenu{
+    margin-top:1rem;
+}
+#standard-search{
+    color: white;
+}
+
 // .radio-toolbar {
 //     margin: 10px;
 //   }

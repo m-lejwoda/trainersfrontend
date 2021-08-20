@@ -12,7 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import '../sass/reservation.css';
 import { connect } from 'react-redux'
 import moment from "moment";
-import { get_trainers, get_hours } from '../redux/actions/trainerActions'
+import { get_trainers, get_hours,get_packages } from '../redux/actions/trainerActions'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -24,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
     },
     selected: {
         width: 300,
+        marginBottom: '1rem',
         color: 'white',
+        
         '&::before': {
             borderBottom: '1px solid white'
         },
         '&::after': {
             borderBottom: '1px solid white'
         }
-
-
     },
     whiteicon: {
         color: 'white !important'
@@ -47,6 +48,11 @@ const Reservation = (props) => {
     const [dayhours, setDayHours] = useState([])
     const [starthour, setStartHour] = useState('')
     const [endhour, setEndHour] = useState('')
+    const [name,setName]= useState("")
+    const [email,setEmail]= useState("")
+    const [phone,setPhone] = useState("")
+    const [userpackage,setUserPackage] = useState(1)
+    const [errormessage,setErrorMessage] = useState("")
 
     const handleInputChange = (event) => {
         setStartHour('')
@@ -57,6 +63,11 @@ const Reservation = (props) => {
             setDayTraining([result])
         })
     };
+
+    const handleInputChangeSelect = (event) => {
+        setUserPackage(event.target.value)
+    }
+
     const parseDate = (date) => {
         let new_date = moment(date).format('YYYY-MM-DD')
         return new_date
@@ -65,6 +76,7 @@ const Reservation = (props) => {
         setStartHour(e.target.attributes.starthour.value)
         setEndHour(e.target.attributes.endhour.value)
     }
+
     const clickDate = (value) => {
         setStartHour('')
         setEndHour('')
@@ -74,6 +86,52 @@ const Reservation = (props) => {
             setDayTraining([result])
         })
     }
+
+    const handleSendData = async() =>{
+        await setErrorMessage("")
+        if (validateData(name,email,phone,trainer,userpackage,starthour,endhour,date)){
+            let data = { 
+                "client_name": name,
+                "client_email": email,
+                "client_phone": "+48"+ phone,
+                "trainer": trainer,
+                "package":userpackage,
+                "events":[
+                    {
+                        "start_hour": starthour,
+                        "end_hour": endhour,
+                        "date": parseDate(date),
+                        "trainer": trainer,
+                        "client_phone": "+48"+ phone,
+                        "client_name": name,
+                        "client_email": email
+                    }
+                ]
+            }
+            console.log(data)
+            await axios.post("http://127.0.0.1:8000/api/add_plan_with_event",data)
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch((err)=>{
+                for (const error_element in err.response.data){
+                    if (error_element === "events"){
+                        
+                    }else{
+                        setErrorMessage("*" + err.response.data[error_element][0])
+                    }
+                    console.log(error_element)
+                    console.log(err.response.data[error_element])
+                }
+            }
+            )
+        }
+        else{
+            console.log("dane niepełne")
+        }
+        
+    }
+
     useEffect((value) => {
         let hours_array = get_hours(parseDate(value), 1)
         hours_array.then(function (result) {
@@ -93,7 +151,23 @@ const Reservation = (props) => {
             setDayHours(temp_array)
         }
     }, [daytraining, trainer]);
-
+    const validateData = (name,email,phone,trainer,userpackage,starthour,endhour,date) => {
+        if(name !== "" && email !== "" && phone !== "" && trainer !== "" && userpackage !== "" && starthour !== "" && endhour !== "" && date !== ""){
+            return true
+        }
+        else{
+            if(starthour === "" || endhour === ""){
+                setErrorMessage("* Wybierz godzine")
+            }
+            if (date === ""){
+                setErrorMessage("* Wybierz datę rezerwacji")
+            }
+            if(name === "" || email === "" || phone === ""){
+                setErrorMessage("* Wprowadź poprawne dane osobowe")
+            }
+            return false
+        }
+    }
     return (
         <div className="reservation">
             <Navbar />
@@ -101,7 +175,7 @@ const Reservation = (props) => {
                 <FormControl className={classes.formControl}>
                     <InputLabel className={classes.selected}>Wybierz trenera</InputLabel>
                     <Select
-                        value={trainer}
+                        defaultValue={trainer}
                         onChange={handleInputChange}
                         className={classes.selected}
                         classes={{
@@ -114,7 +188,6 @@ const Reservation = (props) => {
 
                 
                 <Calendar
-                    // onChange={onChange}
                     onChange={clickDate}
                     value={date}
                     minDate={moment().toDate()}
@@ -122,43 +195,42 @@ const Reservation = (props) => {
                 />
             </div>
             <div className="reservation__elements">
-            {/* <div class="radio-toolbar"> */}
-                    {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" />
-                    <label for="radioApple">Apple</label>
-
-                    <input type="radio" id="radioBanana" name="radioFruit" value="banana" />
-                    <label for="radioBanana">Banana</label>
-
-                    <input type="radio" id="radioOrange" name="radioFruit" value="orange" />
-                    <label for="radioOrange">Orange</label> */}
-                {/* </div> */}
-                {/* {dayhours.map((hour, index) => <div className="reservation__item" key={index} starthour={hour[0]} endhour={hour[1]} onClick={getHour}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</div>)} */}
-                {dayhours.map((hour,index) => <>< input key={index} type="radio" id={hour[0]} name="radioHour" value="hour" disabled={hour[2] ? false : true} /><label key={hour[0]} starthour={hour[0]} endhour={hour[1]} onClick={getHour} for={hour[0]}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</label></>)}
+                {dayhours.length > 0 ? dayhours.map((hour,index) => <div key={index}>< input type="radio" id={hour[0]} name="radioHour" value="hour" disabled={hour[2] ? false : true} /><label  starthour={hour[0]} endhour={hour[1]} onClick={getHour} htmlFor={hour[0]}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</label></div>):<p>Brak wolnych terminów</p>}
             </div>
             <div className="reservation__userdetails">
                 <div className="reservation__userdetails__title">Rezerwacja</div>
                 <FormControl className={classes.formControl}>
-                    <TextField id="standard-search" label="Imię i nazwisko" type="search" className={classes.selected} InputLabelProps={{
+                    <TextField id="standard-search" label="Imię i nazwisko" type="search" onChange={e=>setName(e.target.value)} className={classes.selected} InputLabelProps={{
                         className: classes.selected,
                     }} />
-                    <TextField id="standard-search" label="Adres Email" type="search" classes={{
+                    <TextField id="standard-search" label="Adres Email"  type="search" onChange={e=>setEmail(e.target.value)} classes={{
                         root: classes.selected
                     }}
                         InputLabelProps={{
                             className: classes.selected,
+                        }}/>
+                    <TextField id="standard-search1" label="Telefon" type="search" onChange={e=>setPhone(e.target.value)} className={classes.selected} InputLabelProps={{
+                        className: classes.selected,
+                    }} />
+                    {/* <TextField id="standard-search" label="Godziny" type="search" className={classes.selected} disabled={true} InputLabelProps={{
+                        className: classes.selected,
+                    }} /> */}
+                    {/* <TextField id="standard-search" label="Pakiet" type="search" className={classes.selected} InputLabelProps={{
+                        className: classes.selected,
+                    }} /> */}
+                    <Select
+                        defaultValue={userpackage}
+                        onChange={handleInputChangeSelect}
+                        className={classes.selected}
+                        classes={{
+                            icon: classes.whiteicon
                         }}
-                        InputProps />
-                    <TextField id="standard-search" label="Telefon" type="search" className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} />
-                    <TextField id="standard-search" label="Godziny" type="search" className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} />
-                    <TextField id="standard-search" label="Pakiet" type="search" className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} />
+                    >
+                        {props.packages.map((pack) => <MenuItem key={pack.id} value={pack.id}>{pack.name + " Cena " + pack.price + "zł"}</MenuItem>)}
+                    </Select>
                 </FormControl>
-                <button className="reservation__userdetails__btn">Zatwierdź rezerwacje</button>
+                <button className="reservation__userdetails__btn" onClick={handleSendData}>Zatwierdź rezerwacje</button>
+                <div className="reservation__error">{errormessage}</div>
             </div>
 
 
@@ -168,8 +240,9 @@ const Reservation = (props) => {
 const mapStateToProps = (state) => {
     return {
         trainers: state.trainer.trainers,
-        loadedtrainers: state.trainer.loadedtrainers
+        loadedtrainers: state.trainer.loadedtrainers,
+        packages: state.trainer.packages
     }
 }
 
-export default connect(mapStateToProps, { get_trainers })(Reservation);
+export default connect(mapStateToProps, { get_trainers,get_packages })(Reservation);

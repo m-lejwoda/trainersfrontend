@@ -13,11 +13,12 @@ import Navbar from './components/Navbar';
 import Policy from './components/Policy';
 import Footer from './components/Footer';
 import {connect} from 'react-redux';
-import {get_trainers} from './redux/actions/trainerActions'
+import {get_trainers,get_packages} from './redux/actions/trainerActions'
 
 function App(props) {
   useEffect(()=>{
     props.get_trainers()
+    props.get_packages()
 },[])
 
   return (
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => {
   trainers: state.trainer.trainers,
   loadedtrainers: state.trainer.trainers.loadedtrainers
 }}
-export default connect(mapStateToProps,{get_trainers})(App);
+export default connect(mapStateToProps,{get_trainers,get_packages})(App);

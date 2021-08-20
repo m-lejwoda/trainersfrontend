@@ -1,5 +1,5 @@
 import axios from "axios"
-import {GET_TRAINERS} from '../types'
+import {GET_PACKAGES, GET_TRAINERS} from '../types'
 import moment from "moment";
 
 export const get_trainers = () => (dispatch) => {
@@ -9,6 +9,16 @@ export const get_trainers = () => (dispatch) => {
             type: GET_TRAINERS,
             payload: res.data
         });
+    })
+}
+
+export const get_packages = () => (dispatch) => {
+    axios.get('http://127.0.0.1:8000/api/get_packages')
+    .then((res)=>{
+        dispatch({
+            type: GET_PACKAGES,
+            payload: res.data
+        })
     })
 }
 // export const get_hours = (date,trainer) => {

@@ -1,7 +1,8 @@
-import {GET_TRAINERS} from '../types'
+import {GET_PACKAGES, GET_TRAINERS} from '../types'
 
 const initialState = {
   trainers: [],
+  packages: [],
   loadedtrainers: false
 }
 const trainingReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const trainingReducer = (state = initialState, action) => {
         ...state,
         trainers: action.payload,
         loadedtrainers: true
+      }
+    case GET_PACKAGES:
+      return {
+        ...state,
+        packages: action.payload
       }
     default:
       return state
