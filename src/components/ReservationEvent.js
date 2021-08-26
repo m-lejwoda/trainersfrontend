@@ -1,4 +1,3 @@
-
 import Navbar from "./Navbar";
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
@@ -12,9 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import '../sass/reservation.css';
 import { connect } from 'react-redux'
 import moment from "moment";
-import { get_trainers, get_hours, get_packages } from '../redux/actions/trainerActions'
+import { get_trainers, get_hours, get_packages,add_event_to_plan } from '../redux/actions/trainerActions'
 import axios from 'axios';
-
+import {useParams} from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
@@ -40,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Reservation = (props) => {
+
+const ReservationEvent = (props) => {
+    
     const [date, changeDate] = useState(new Date());
     const [trainer, setTrainer] = useState(1)
-    const classes = useStyles();
     const [daytraining, setDayTraining] = useState([])
     const [dayhours, setDayHours] = useState([])
     const [starthour, setStartHour] = useState('')
@@ -53,6 +53,26 @@ const Reservation = (props) => {
     const [phone, setPhone] = useState("")
     const [userpackage, setUserPackage] = useState(1)
     const [errormessage, setErrorMessage] = useState("")
+    const classes = useStyles();
+    const {planid,username,useremail,userphone,usertrainer} = useParams()
+    
+    const handleSendData = () =>{
+        let data = {
+            "id": planid,
+            "client_phone": userphone,
+            "client_name": username,
+            "client_email": useremail,
+            "start_hour": starthour,
+            "end_hour": endhour,
+            "date": parseDate(date)
+        }
+        props.add_event_to_plan(data)
+
+    }
+
+    // const handleCheckIfUserIsValid = () => {
+    //     console.log(planid,username,useremail)
+    // }
 
     const handleInputChange = (event) => {
         setStartHour('')
@@ -87,44 +107,7 @@ const Reservation = (props) => {
         })
     }
 
-    const handleSendData = async () => {
-        await setErrorMessage("")
-        if (validateData(name, email, phone, trainer, userpackage, starthour, endhour, date)) {
-            let data = {
-                "client_name": name,
-                "client_email": email,
-                "client_phone": "+48" + phone,
-                "trainer": trainer,
-                "package": userpackage,
-                "events": [
-                    {
-                        "start_hour": starthour,
-                        "end_hour": endhour,
-                        "date": parseDate(date),
-                        "trainer": trainer,
-                        "client_phone": "+48" + phone,
-                        "client_name": name,
-                        "client_email": email
-                    }
-                ]
-            }
-            await axios.post("http://127.0.0.1:8000/api/add_plan_with_event", data)
-                .then((res) => {
-                    console.log(res.data)
-                })
-                .catch((err) => {
-                    for (const error_element in err.response.data) {
-                        if (error_element === "events") {
-
-                        } else {
-                            setErrorMessage("*" + err.response.data[error_element][0])
-                        }
-                    }
-                }
-                )
-        }
-
-    }
+    
     useEffect((value) => {
         let hours_array = get_hours(parseDate(value), 1)
         hours_array.then(function (result) {
@@ -144,31 +127,15 @@ const Reservation = (props) => {
             setDayHours(temp_array)
         }
     }, [daytraining, trainer]);
-    const validateData = (name, email, phone, trainer, userpackage, starthour, endhour, date) => {
-        if (name !== "" && email !== "" && phone !== "" && trainer !== "" && userpackage !== "" && starthour !== "" && endhour !== "" && date !== "") {
-            return true
-        }
-        else {
-            if (starthour === "" || endhour === "") {
-                setErrorMessage("* Wybierz godzine")
-            }
-            if (date === "") {
-                setErrorMessage("* Wybierz datę rezerwacji")
-            }
-            if (name === "" || email === "" || phone === "") {
-                setErrorMessage("* Wprowadź poprawne dane osobowe")
-            }
-            return false
-        }
-    }
+    
     return (
         <div className="reservation">
             <Navbar />
             <div className="calendar reservation__calendar">
                 <FormControl className={classes.formControl}>
-                    <InputLabel className={classes.selected}>Wybierz trenera</InputLabel>
+                    <InputLabel className={classes.selected}>Wybierz trenera2</InputLabel>
                     <Select
-                        defaultValue={trainer}
+                        defaultValue={usertrainer}
                         onChange={handleInputChange}
                         className={classes.selected}
                         classes={{
@@ -191,38 +158,8 @@ const Reservation = (props) => {
                 {dayhours.length > 0 ? dayhours.map((hour, index) => <div key={index}>< input type="radio" id={hour[0]} name="radioHour" value="hour" disabled={hour[2] ? false : true} /><label starthour={hour[0]} endhour={hour[1]} onClick={getHour} htmlFor={hour[0]}>{hour[0].slice(0, -3)} - {hour[1].slice(0, -3)}</label></div>) : <p>Brak wolnych terminów</p>}
             </div>
             <div className="reservation__userdetails">
-                <div className="reservation__userdetails__title">Rezerwacja</div>
-                <FormControl className={classes.formControl}>
-                    <TextField id="standard-search" label="Imię i nazwisko" type="search" onChange={e => setName(e.target.value)} className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} />
-                    <TextField id="standard-search" label="Adres Email" type="search" onChange={e => setEmail(e.target.value)} classes={{
-                        root: classes.selected
-                    }}
-                        InputLabelProps={{
-                            className: classes.selected,
-                        }} />
-                    <TextField id="standard-search1" label="Telefon" type="search" onChange={e => setPhone(e.target.value)} className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} />
-                    {/* <TextField id="standard-search" label="Godziny" type="search" className={classes.selected} disabled={true} InputLabelProps={{
-                        className: classes.selected,
-                    }} /> */}
-                    {/* <TextField id="standard-search" label="Pakiet" type="search" className={classes.selected} InputLabelProps={{
-                        className: classes.selected,
-                    }} /> */}
-                    <Select
-                        defaultValue={userpackage}
-                        onChange={handleInputChangeSelect}
-                        className={classes.selected}
-                        classes={{
-                            icon: classes.whiteicon
-                        }}
-                    >
-                        {props.packages.map((pack) => <MenuItem key={pack.id} value={pack.id}>{pack.name + " Cena " + pack.price + "zł"}</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <button className="reservation__userdetails__btn" onClick={handleSendData}>Zatwierdź rezerwacje</button>
+
+                <button className="reservation__userdetails__btn" onClick={handleSendData}>Dodaj trening do pakietu</button>
                 <div className="reservation__error">{errormessage}</div>
             </div>
 
@@ -237,5 +174,4 @@ const mapStateToProps = (state) => {
         packages: state.trainer.packages
     }
 }
-
-export default connect(mapStateToProps, { get_trainers, get_packages })(Reservation);
+export default connect(mapStateToProps, { get_trainers, get_packages,add_event_to_plan })(ReservationEvent);

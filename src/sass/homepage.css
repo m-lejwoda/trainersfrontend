@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Fjalla+One&family=Oswald&family=Rampart+One&display=swap");
 body {
   background-color: #020101;
 }
@@ -68,7 +69,12 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 1.4rem;
+  font-weight: 600;
   color: white;
+}
+
+.logo__name {
+  font-family: 'Fjalla One', sans-serif;
 }
 
 .header {
@@ -211,14 +217,26 @@ body {
 }
 
 .offer__btn {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   font-weight: 600;
-  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  font-size: 1.3rem;
+  padding: 0.8rem 0.5rem 0.8rem 0.5rem;
   display: inline-block;
-  width: 50%;
+  width: 250px;
   margin-bottom: 1rem;
   color: #fff;
-  background-color: #e51c21;
-  border-color: transparent;
+  background-color: transparent;
+  border-color: white;
+}
+
+.offer__btn:hover, .offer__btn:focus {
+  -webkit-box-shadow: inset 100em 0 0 0 #ff2a43;
+          box-shadow: inset 100em 0 0 0 #ff2a43;
+}
+
+.offer__btn:hover {
+  cursor: pointer;
 }
 
 .offer__elements {
@@ -279,12 +297,12 @@ body {
 }
 
 .offer__item__title--small {
+  width: 90%;
   padding-top: 1rem;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: 400;
   text-align: center;
-  width: 60%;
   font-family: "Montserrat",Sans-serif;
 }
 
@@ -300,23 +318,39 @@ body {
 }
 
 .packages__elements__item__btn {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  margin-top: 1rem;
   font-size: 1.3rem;
   font-weight: 600;
-  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   display: inline-block;
   width: 70%;
   margin-bottom: 1rem;
   color: #fff;
-  background-color: #e51c21;
-  border-color: transparent;
+  border: 2px solid white;
+  background-color: transparent;
+}
+
+.packages__elements__item__btn:hover, .packages__elements__item__btn:focus {
+  -webkit-box-shadow: inset 100em 0 0 0 #ff2a43;
+          box-shadow: inset 100em 0 0 0 #ff2a43;
+}
+
+.packages__elements__item__btn:hover {
+  cursor: pointer;
 }
 
 .packages__elements__item__content--big {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-family: 'Anton', sans-serif;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 .packages__elements__item__content--small {
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 0.4rem;
   font-size: 1.2rem;
   font-weight: 400;
 }
@@ -356,13 +390,15 @@ body {
 }
 
 .packages__others {
+  margin: 1rem 0rem 1rem 0rem;
   color: black;
+  letter-spacing: 0.1em;
   background-color: white;
   text-align: center;
   font-weight: 600;
   padding: 1rem;
   font-size: 1.2rem;
-  font-family: "Montserrat",Sans-serif;
+  font-family: 'Acme', sans-serif;
 }
 
 .contactus {
@@ -513,6 +549,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   text-align: center;
+  padding-top: 1rem;
 }
 
 .footer__copyright-info {
@@ -527,5 +564,73 @@ body {
 .footer__copyright-info--white {
   color: white;
   margin-bottom: 0.5rem;
+}
+
+.transformation__name {
+  font-size: 1.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: 'Anton', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.transformation__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.transformation__btn {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  display: inline-block;
+  width: 70%;
+  margin-bottom: 1rem;
+  color: #fff;
+  border: 2px solid white;
+  background-color: transparent;
+}
+
+.transformation__btn:hover, .transformation__btn:focus {
+  -webkit-box-shadow: inset 100em 0 0 0 #ff2a43;
+          box-shadow: inset 100em 0 0 0 #ff2a43;
+}
+
+.transformation__title {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  color: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.transformation__title::after {
+  content: "";
+  width: 70%;
+  height: 5px;
+  display: block;
+  background-color: red;
+  position: absolute;
+  bottom: 0;
 }
 /*# sourceMappingURL=homepage.css.map */

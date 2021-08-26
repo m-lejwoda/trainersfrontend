@@ -1,9 +1,13 @@
-import {GET_PACKAGES, GET_TRAINERS} from '../types'
+import {GET_ALL_TRANSFORMATIONS, GET_PACKAGES, GET_THREETRANSFORMATIONS, GET_TRAINERS,ADD_EVENT_TO_PLAN} from '../types'
 
 const initialState = {
   trainers: [],
   packages: [],
-  loadedtrainers: false
+  threetransformations: [],
+  loadedtrainers: false,
+  alltransformations: [],
+  next: '',
+  previous: ''
 }
 const trainingReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,6 +22,25 @@ const trainingReducer = (state = initialState, action) => {
         ...state,
         packages: action.payload
       }
+    case GET_THREETRANSFORMATIONS:
+      return{
+        ...state,
+        threetransformations: action.payload
+      }
+    case GET_ALL_TRANSFORMATIONS: 
+      let newArr = state.alltransformations.concat(action.payload.results);
+      return{
+        ...state,
+        // alltransformations: [...state.alltransformations,action.payload.results],
+        alltransformations: newArr,
+        next:action.next,
+        previous:action.previous
+      }
+    case ADD_EVENT_TO_PLAN:
+      return{
+        ...state
+      }
+    
     default:
       return state
   }

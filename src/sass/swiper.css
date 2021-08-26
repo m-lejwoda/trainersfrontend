@@ -26,4 +26,84 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+li.thumb {
+  display: none;
+}
+
+ul.thumbs {
+  display: none;
+}
+
+ul.control-dots {
+  bottom: 20%;
+}
+
+.carousel__element {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.carousel img {
+  width: 80% !important;
+}
+
+.carousel__title {
+  font-size: 1.4rem;
+  padding-top: 1rem;
+}
+
+.carousel__secondtitle {
+  font-size: 1.4rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  font-weight: 600;
+}
+
+.carousel__container {
+  width: 80%;
+}
+
+.carousel__container .carousel__img {
+  width: 80%;
+}
+
+li.slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+li.slide .carousel__container img {
+  width: 80% !important;
+}
+
+li.slide .carousel__container img.carousel__img {
+  width: 80%;
+  height: 300px;
+}
+
+.carousel-root {
+  width: 100%;
+}
+
+.carousel-status {
+  display: none;
+}
 /*# sourceMappingURL=swiper.css.map */

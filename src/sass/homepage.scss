@@ -1,6 +1,10 @@
 $headerimg: "http://localhost:3000/gym.jpg";
 $gymimg: "http://localhost:3000/weight.jpg";
 $beatifullred: #ff2a43;
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Fjalla+One&family=Oswald&family=Rampart+One&display=swap');
+// html{
+//     // overflow: hidden;
+// }
 body{
     // color:white;
     background-color: #020101;
@@ -48,7 +52,12 @@ body{
     display:flex;
     justify-content: center;
     font-size: 1.4rem;
+    font-weight: 600;
     color:white;
+    &__name{
+        font-family: 'Fjalla One', sans-serif;
+
+    }
 }
 .header{
     height: 400px;
@@ -164,14 +173,27 @@ body{
         bottom: 0;
     }
     &__btn{
+        transition: 0.5s;
         font-weight: 600;
-        padding:0.3rem 0.5rem 0.3rem 0.5rem;
+        font-size:1.3rem;
+        padding:0.8rem 0.5rem 0.8rem 0.5rem;
         display:inline-block;
-        width: 50%;
+        // width: 75%;
+        width:250px;
         margin-bottom:1rem;
         color: #fff;
-        background-color: #e51c21;
-        border-color: transparent;
+        background-color:transparent;
+        border-color: white;
+        // background-color: #e51c21;
+        // border-color: transparent;
+    }
+    &__btn:hover,
+    &__btn:focus{
+        box-shadow: inset 100em 0 0 0 $beatifullred;
+    }
+    &__btn:hover{
+        cursor: pointer;
+                // background-color: black;
     }
     &__elements{
         margin-top:2rem;
@@ -209,6 +231,7 @@ body{
         &__title{
             
             &--big{
+                
                 padding-top:1rem;
                 font-size:1.6rem;
                 margin-bottom: 1rem;
@@ -219,13 +242,12 @@ body{
                 
             }
             &--small{
-                
+                width: 90%;
                 padding-top:1rem;
                 font-size:1.2rem;
                 margin-bottom: 1rem;
                 font-weight: 400;
                 text-align: center;
-                width:60%;
                 font-family: "Montserrat",Sans-serif;
             }
     }
@@ -240,22 +262,39 @@ body{
             border-radius: 30px;
             padding:2rem;
             &__btn{
+                transition: 0.5s;
+                margin-top:1rem;
                 font-size:1.3rem;
                 font-weight: 600;
-                padding:0.3rem 0.5rem 0.3rem 0.5rem;
+                padding:0.5rem 0.5rem 0.5rem 0.5rem;
                 display:inline-block;
                 width: 70%;
                 margin-bottom:1rem;
                 color: #fff;
-                background-color: #e51c21;
-                border-color: transparent;
+                // background-color: #e51c21;
+                border:2px solid white;
+                background-color: transparent;
+                
+                // border-color: transparent;
+            }
+            &__btn:hover,
+            &__btn:focus{
+                box-shadow: inset 100em 0 0 0 $beatifullred;
+            }
+            &__btn:hover{
+                cursor: pointer;
+                // background-color: black;
             }
             &__content{
                 &--big{
-                    font-size:1.4rem;
-                    font-weight: 600;
+                    font-family: 'Anton', sans-serif;
+                    margin-bottom: 1rem;
+                    font-size:1.5rem;
+                    font-weight: 800;
                 }
                 &--small{
+                    font-family: 'Oswald', sans-serif;
+                    margin-bottom: 0.4rem;
                     font-size:1.2rem;
                     font-weight: 400;
                 }
@@ -290,13 +329,15 @@ body{
         bottom: 0;
     }
     &__others{
+        margin: 1rem 0rem 1rem 0rem;
         color:black;
+        letter-spacing: 0.1em;
         background-color: white;
         text-align: center;
         font-weight: 600;
         padding:1rem;
         font-size:1.2rem;
-        font-family: "Montserrat",Sans-serif;
+        font-family: 'Acme', sans-serif;
     }
 }
 .contactus{
@@ -405,6 +446,7 @@ body{
     display:flex;
     flex-direction: column;
     text-align: center;
+    padding-top: 1rem;
     &__copyright-info{
         font-size:0.8rem;
         &--red{
@@ -415,5 +457,59 @@ body{
             color: white;
             margin-bottom:0.5rem;
         }
+    }
+}
+.transformation{
+    &__name{
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        font-family: 'Anton', sans-serif;
+        margin-bottom:2rem;
+    }
+    &__button{
+        display:flex;
+        justify-content: center;
+    }
+    &__btn{
+        transition: 0.5s;
+        margin-top:1rem;
+        font-size:1.3rem;
+        font-weight: 600;
+        padding:0.5rem 0.5rem 0.5rem 0.5rem;
+        display:inline-block;
+        width: 70%;
+        margin-bottom:1rem;
+        color: #fff;
+        // background-color: #e51c21;
+        border:2px solid white;
+        background-color: transparent;
+        
+        // border-color: transparent;
+    }
+    &__btn:hover,
+    &__btn:focus{
+        box-shadow: inset 100em 0 0 0 $beatifullred;
+    }
+    &__title{
+        padding-top:1rem;
+        padding-bottom: 1rem;
+        font-size:2rem;
+        color:grey;
+        display: flex;
+        justify-content: center;
+        position:relative;
+        margin-bottom: 3rem;
+        margin-top:1rem;
+        text-align: center;
+    }
+    &__title::after{
+        content:"";
+        width:70%;
+        height:5px;
+        display:block;
+        background-color: red;
+        position: absolute;
+        bottom: 0;
     }
 }

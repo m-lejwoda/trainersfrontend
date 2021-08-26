@@ -1,10 +1,15 @@
-import { faCoffee, faHamburger, faPhone, faMailBulk, faHeartbeat,faBars } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faMailBulk } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Swip from './Swip';
+import {useEffect} from 'react'
+import TrainerSlider from './TrainerSlider'
 import '../sass/homepage.css';
 import Navbar from './Navbar';
-const HomePage = () => {
+import { connect } from 'react-redux'
+import ImageSlider from './ImageSlider';
+const HomePage = (props) => {
+    const {threetransformations} = props
+    
     return (
         <div className="homepage">
             <section className="socials homepage__socials">
@@ -35,22 +40,16 @@ const HomePage = () => {
             </section>
             <section className="trainers homepage__trainers">
                 <div className="trainers__title"><span>Nasi Trenerzy</span></div>
-                <div className="trainers__trainer">
-                    <div className="trainers__trainer__img"><img src="http://localhost:3000/trainer5.jpg" alt="trener" /></div>
-                    <div className="trainers__trainer__name">Patryk Trener</div>
-                    <div className="trainers__trainer__job">Dietetyk / Trener Personalny</div>
-                </div>
+                <TrainerSlider trainer={props.trainers} />
             </section>
-            {/* <Swip /> */}
             <section className="aboutus homepage__aboutus">
                 <div className="aboutus__title">O nas</div>
-
                 <div className="aboutus__content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, eaque. Modi adipisci explicabo impedit, optio eaque esse architecto facilis dolor sapiente quos? Aspernatur quam omnis blanditiis odio corporis itaque recusandae!</div>
             </section>
             <section className="transformations homepage__transformation">
-                <div className="transformation__person"><img src="" alt="" /></div>
-                <div className="transformation__person"><img src="" alt="" /></div>
-                <div className="transformation__person"><img src="" alt="" /></div>
+                <div className="transformation__title">Transformacje Podopiecznych</div>
+                {threetransformations.map((transformation) => <div key={transformation.id}><ImageSlider transformation={transformation}/><div className="transformation__name">{transformation.name}</div></div>)}
+                <div className="transformation__button"><button className="transformation__btn">Zobacz resztę transformacji</button></div>
             </section>
             <section className="offer homepage__offer">
                 <div className="offer__title">
@@ -138,5 +137,12 @@ const HomePage = () => {
         </div>
     );
 }
-
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+        trainers: state.trainer.trainers,
+        threetransformations: state.trainer.threetransformations
+        // loadedtrainers: state.trainer.loadedtrainers,
+        // packages: state.trainer.packages
+    }
+}
+export default connect(mapStateToProps)(HomePage);
