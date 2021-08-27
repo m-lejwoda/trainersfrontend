@@ -48,9 +48,6 @@ const ReservationEvent = (props) => {
     const [dayhours, setDayHours] = useState([])
     const [starthour, setStartHour] = useState('')
     const [endhour, setEndHour] = useState('')
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
     const [userpackage, setUserPackage] = useState(1)
     const [errormessage, setErrorMessage] = useState("")
     const classes = useStyles();
